@@ -105,7 +105,7 @@ export default {
     <div class="row">
       <div class="col-8 offset-2">
         <div class="input-group mb-3 text-center">
-          <input type="text" v-model="searchQuery" placeholder="Search coins..." @input="searchCoins">
+          <input type="text" class="form-control" v-model="searchQuery" placeholder="Search coins..." @input="searchCoins">
         </div>
       </div>
     </div>

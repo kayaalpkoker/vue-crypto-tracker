@@ -16,7 +16,7 @@ import Title from './components/Title.vue'
     <div class="row mb-3">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/categories">Categories (tbd)</RouterLink>
+        <RouterLink to="/categories">Categories</RouterLink>
       </nav>
     </div>
 

@@ -14,7 +14,7 @@ export default {
                         order: 'market_cap_desc',
                     }
                 });
-                this.coins = response.data;
+                this.categories = response.data;
                 /*
                 Sample API response:
                     "id": "layer-1",
@@ -34,8 +34,18 @@ export default {
                 console.error('Failed to fetch categories:', error);
             }
         },
+        formatCurrency(value) {
+            const formattedValue = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(value);
+            return formattedValue;
+        },
         formatPercentage(value) {
-            return value.toFixed(1) + '%';
+            if (value != null) {
+                return value.toFixed(1) + '%';
+            }
+            return '0.0 %'
         },
         getPercentageClass(value) {
             return value > 0 ? 'text-green' : 'text-red';
@@ -74,7 +84,9 @@ export default {
                                 <img :src="category.top_3_coins[2]" alt="" width="30" height="30">
                             </td>
                             <td :class="getPercentageClass(category.market_cap_change_24h)">
-                                {{ formatPercentage(category.market_cap_change_24h) }}</td>
+                                {{ formatPercentage(category.market_cap_change_24h) }}
+                            </td>
+                            <td>{{ formatCurrency(category.market_cap) }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -84,19 +96,19 @@ export default {
 </template>
 
 <style scoped>
+.text-green {
+    color: green;
+}
+
+.text-red {
+    color: red;
+}
+
 @media (min-width: 1024px) {
     .about {
         min-height: 100vh;
         display: flex;
         align-items: center;
-    }
-
-    .text-green {
-        color: green;
-    }
-
-    .text-red {
-        color: red;
     }
 }
 </style>

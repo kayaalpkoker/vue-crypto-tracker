@@ -12,7 +12,7 @@ export default {
   mounted() {
     axios.get('')
       .then((response) => {
-        console.log(response.data.)
+        console.log(response.data)
         //
       })
   }

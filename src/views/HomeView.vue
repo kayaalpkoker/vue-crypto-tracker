@@ -1,6 +1,4 @@
 <script>
-import axios from 'axios';
-
 export default {
   name: 'HomeView',
   data() {
@@ -12,7 +10,7 @@ export default {
   methods: {
     async getCoins() {
       try {
-        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
+        const response = await this.$axios.get('https://api.coingecko.com/api/v3/coins/markets', {
           params: {
             vs_currency: 'usd',
             order: 'market_cap_desc',
@@ -59,7 +57,7 @@ export default {
     //},
     async searchCoins() {
       try {
-        const response = await axios.get('https://api.coingecko.com/api/v3/search', {
+        const response = await this.$axios.get('https://api.coingecko.com/api/v3/search', {
           params: {
             q: this.searchQuery,
             per_page: 100,
@@ -76,6 +74,19 @@ export default {
       } catch (error) {
         console.error('Failed to search coins:', error);
       }
+    },
+    formatCurrency(value) {
+      const formattedValue = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }).format(value);
+      return formattedValue;
+    },
+    formatPercentage(value) {
+      return value.toFixed(1) + '%';
+    },
+    getPercentageClass(value) {
+      return value > 0 ? 'text-green' : 'text-red';
     }
   },
   computed: {
@@ -96,28 +107,50 @@ export default {
 </script>
 
 <template>
-  <div class="home">
-    <input type="text" v-model="searchQuery" placeholder="Search" @input="searchCoins">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Market Cap</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(coin, index) in coins" :key="coin.id">
-          <td>{{ index+1 }}</td>
-          <td>
-            <img :src="coin.image" alt="Coin Icon" width="30" height="30">
-            {{ coin.name }} {{ coin.symbol }}</td>
-          <td>{{ coin.current_price }}</td>
-          <td>{{ coin.market_cap }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <div class="search mb-3">
+          <input type="text" v-model="searchQuery" placeholder="Search" @input="searchCoins">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h3>Cryptocurrency Rankings by Market Cap</h3>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>24h</th>
+              <th>Low</th>
+              <th>High</th>
+              <th>Market Cap</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(coin, index) in coins" :key="coin.id">
+              <td>{{ index + 1 }}</td>
+              <td>
+                <img :src="coin.image" alt="Coin Icon" width="30" height="30">
+                {{ coin.name }} <span class="text-uppercase">{{ coin.symbol }}</span>
+              </td>
+              <td>{{ formatCurrency(coin.current_price) }}</td>
+              <td :class="getPercentageClass(coin.price_change_percentage_24h)">
+                {{ formatPercentage(coin.price_change_percentage_24h) }}
+              </td>
+              <td>{{ formatCurrency(coin.low_24h) }}</td>
+              <td>{{ formatCurrency(coin.high_24h) }}</td>
+              <td>{{ formatCurrency(coin.market_cap) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -127,5 +160,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.text-green {
+  color: green;
+}
+
+.text-red {
+  color: red;
 }
 </style>

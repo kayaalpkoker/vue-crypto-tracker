@@ -21,9 +21,10 @@ import Title from './components/Title.vue'
 
   <RouterView />
 
-  <div class="wrapper">
-    <Title msg="Thanks for visiting!" />
-  </div>
+  <footer class="row">
+    <p>&copy; 2023 Kaya Alp Köker. All rights reserved.</p>
+  </footer>
+
 </template>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './components/Title.vue'
 </script>
 
 <template>
@@ -10,16 +10,20 @@ import HelloWorld from './components/HelloWorld.vue'
     </RouterLink>
 
     <div class="wrapper">
-      <HelloWorld msg="Nomad's Crypto Hub" />
+      <Title msg="Nomad's Crypto Hub" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/categories">Categories</RouterLink>
+        <RouterLink to="/categories">Categories (tbd)</RouterLink>
       </nav>
     </div>
   </header>
 
   <RouterView />
+
+  <div class="wrapper">
+    <Title msg="Thanks for visiting!" />
+  </div>
 </template>
 
 <style scoped>

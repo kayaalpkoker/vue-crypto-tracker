@@ -20,17 +20,43 @@ export default {
             page: 1
           }
         });
-        const data = response.data;
-        this.coins = data.map((coin) => ({
-          id: coin.id,
-          name: coin.name,
-          symbol: coin.symbol,
-          marketCap: coin.market_cap
-        }));
+        this.coins = response.data;
+        /*
+        Sample API response data:
+          "id": "bitcoin",
+          "symbol": "btc",
+          "name": "Bitcoin",
+          "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+          "current_price": 26672,
+          "market_cap": 516682635093,
+          "market_cap_rank": 1,
+          "fully_diluted_valuation": 559953725872,
+          "total_volume": 14840872205,
+          "high_24h": 27448,
+          "low_24h": 26517,
+          "price_change_24h": -722.8597876205604,
+          "price_change_percentage_24h": -2.63867,
+          "market_cap_change_24h": -13689526449.420288,
+          "market_cap_change_percentage_24h": -2.58112,
+          "circulating_supply": 19377200.0,
+          "total_supply": 21000000.0,
+          "max_supply": 21000000.0,
+          "ath": 69045,
+          "ath_change_percentage": -61.38137,
+          "ath_date": "2021-11-10T14:24:11.849Z",
+          "atl": 67.81,
+          "atl_change_percentage": 39222.42358,
+          "atl_date": "2013-07-06T00:00:00.000Z",
+          "roi": null,
+          "last_updated": "2023-05-18T19:43:25.368Z"
+        */
       } catch (error) {
         console.error('Failed to fetch coins:', error);
       }
     },
+    //toCoin(id) {
+    //  return 'coin/${id}'
+    //},
     async searchCoins() {
       try {
         const response = await axios.get('https://api.coingecko.com/api/v3/search', {
@@ -77,16 +103,18 @@ export default {
         <tr>
           <th>#</th>
           <th>Name</th>
-          <th>Symbol</th>
+          <th>Price</th>
           <th>Market Cap</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(coin, index) in coins" :key="coin.id">
           <td>{{ index+1 }}</td>
-          <td>{{ coin.name }}</td>
-          <td>{{ coin.symbol }}</td>
-          <td>{{ coin.marketCap }}</td>
+          <td>
+            <img :src="coin.image" alt="Coin Icon" width="30" height="30">
+            {{ coin.name }} {{ coin.symbol }}</td>
+          <td>{{ coin.current_price }}</td>
+          <td>{{ coin.market_cap }}</td>
         </tr>
       </tbody>
     </table>

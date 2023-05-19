@@ -131,7 +131,8 @@ export default {
               <td>{{ index + 1 }}</td>
               <td>
                 <img :src="coin.image" alt="Coin Icon" width="30" height="30">
-                {{ coin.name }} <span class="text-uppercase">{{ coin.symbol }}</span>
+                <RouterLink :to="toCoin(coin.id)">{{ coin.name }}</RouterLink>
+                <span class="text-uppercase">{{ coin.symbol }}</span>
               </td>
               <td>{{ formatCurrency(coin.current_price) }}</td>
               <td :class="getPercentageClass(coin.price_change_percentage_24h)">

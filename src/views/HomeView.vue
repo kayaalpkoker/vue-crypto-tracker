@@ -20,7 +20,7 @@ export default {
         });
         this.coins = response.data;
         /*
-        Sample API response data:
+        Sample API response:
           "id": "bitcoin",
           "symbol": "btc",
           "name": "Bitcoin",
@@ -52,28 +52,22 @@ export default {
         console.error('Failed to fetch coins:', error);
       }
     },
-    //toCoin(id) {
-    //  return 'coin/${id}'
-    //},
     async searchCoins() {
       try {
         const response = await this.$axios.get('https://api.coingecko.com/api/v3/search', {
           params: {
             q: this.searchQuery,
-            per_page: 100,
+            per_page: 50,
             page: 1
           }
         });
-        const data = response.data;
-        this.coins = data.coins.map((coin) => ({
-          id: coin.id,
-          name: coin.name,
-          symbol: coin.symbol,
-          marketCap: coin.market_cap
-        }));
+        this.coins = response.data;
       } catch (error) {
         console.error('Failed to search coins:', error);
       }
+    },
+    toCoin(coinId) {
+      return `coin/${coinId}`
     },
     formatCurrency(value) {
       const formattedValue = new Intl.NumberFormat('en-US', {
@@ -107,20 +101,20 @@ export default {
 </script>
 
 <template>
-  <div class="container text-center">
+  <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
-        <div class="search mb-3">
-          <input type="text" v-model="searchQuery" placeholder="Search" @input="searchCoins">
+        <div class="input-group mb-3 text-center">
+          <input type="text" v-model="searchQuery" placeholder="Search coins..." @input="searchCoins">
         </div>
       </div>
     </div>
     <div class="row">
-      <h3>Cryptocurrency Rankings by Market Cap</h3>
+      <h3 class="text-center">Cryptocurrency Rankings by Market Cap</h3>
     </div>
     <div class="row">
       <div class="col-12 mb-3">
-        <table>
+        <table class="table">
           <thead>
             <tr>
               <th>#</th>

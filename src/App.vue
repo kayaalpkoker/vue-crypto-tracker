@@ -4,19 +4,22 @@ import Title from './components/Title.vue'
 </script>
 
 <template>
-  <header>
+  <header class="container">
     <RouterLink to="/">
       <img alt="NCT logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
     </RouterLink>
 
-    <div class="wrapper">
+    <div class="row">
       <Title msg="Nomad's Crypto Hub" />
-
+    </div>
+    
+    <div class="row mb-3">
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/categories">Categories (tbd)</RouterLink>
       </nav>
     </div>
+
   </header>
 
   <RouterView />

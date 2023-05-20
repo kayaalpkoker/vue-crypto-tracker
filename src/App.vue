@@ -1,23 +1,33 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './components/Title.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="NCT logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <header class="container">
+    <RouterLink to="/">
+      <img alt="NCT logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    </RouterLink>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
+    <div class="row">
+      <Title msg="Nomad's Crypto Hub" />
+    </div>
+    
+    <div class="row mb-3">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/categories">Categories</RouterLink>
       </nav>
     </div>
+
   </header>
 
   <RouterView />
+
+  <footer class="row">
+    <p>&copy; 2023 Kaya Alp Köker. All rights reserved.</p>
+  </footer>
+
 </template>
 
 <style scoped>

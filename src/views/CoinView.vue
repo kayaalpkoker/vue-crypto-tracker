@@ -48,7 +48,6 @@ export default {
 }
 </script>
 
-
 <template>
   <div class="container">
     <main v-if="isFetched">
@@ -58,8 +57,8 @@ export default {
             <p>Rank #{{ coin.market_cap_rank }}</p>
           </div>
           <div>
-            <span><img :src="coin.image.small" alt="Coin Icon" width="30" height="30"></span>
-            <span>{{ coin.name }}</span>
+            <span><img :src="coin.image.small" alt="Coin Icon" width="30" height="30"></span>&nbsp;
+            <span>{{ coin.name }}</span>&nbsp;
             <span class="text-uppercase">{{ coin.symbol }}</span>
           </div>
           <div>

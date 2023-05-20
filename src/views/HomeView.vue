@@ -47,6 +47,14 @@ export default {
       }).format(value);
       return formattedValue;
     },
+    formatLargeCurrency(value) {
+      const formattedValue = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+      }).format(value);
+      return formattedValue;
+    },
     formatPercentage(value) {
       return value.toFixed(1) + '%';
     },
@@ -63,11 +71,13 @@ export default {
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-10 offset-1">
+      <div class="col-12">
+        <!--
         <div class="input-group mb-3 text-center">
-          <input type="text" class="form-control" v-model="searchQuery" placeholder="Search coins..."
-            @input="searchCoins">
+          <input type="text" class="form-control" v-model="searchQuery" placeholder="<Search function under construction>"
+            @input="">
         </div>
+        -->
       </div>
     </div>
     <div class="row">
@@ -80,28 +90,28 @@ export default {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Price</th>
-              <th>24h</th>
-              <th>Low</th>
-              <th>High</th>
-              <th>Market Cap</th>
+              <th class="align-right">Price</th>
+              <th class="d-none d-md-table-cell align-right">24h</th>
+              <th class="d-none d-lg-table-cell align-right">Low</th>
+              <th class="d-none d-lg-table-cell align-right">High</th>
+              <th class="d-none d-md-table-cell align-right">Market Cap</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(coin, index) in coins" :key="coin.id">
               <td>{{ index + 1 }}</td>
               <td>
-                <img :src="coin.image" alt="Coin Icon" width="30" height="30">
-                <RouterLink :to="toCoin(coin.id)">{{ coin.name }}</RouterLink>
+                <img :src="coin.image" alt="Coin Icon" width="30" height="30">&nbsp;
+                <RouterLink :to="toCoin(coin.id)">{{ coin.name }}</RouterLink>&nbsp;
                 <span class="text-uppercase">{{ coin.symbol }}</span>
               </td>
-              <td>{{ formatCurrency(coin.current_price) }}</td>
-              <td :class="getPercentageClass(coin.price_change_percentage_24h)">
+              <td class="align-right">{{ formatCurrency(coin.current_price) }}</td>
+              <td class="d-none d-md-table-cell align-right" :class="getPercentageClass(coin.price_change_percentage_24h)">
                 {{ formatPercentage(coin.price_change_percentage_24h) }}
               </td>
-              <td>{{ formatCurrency(coin.low_24h) }}</td>
-              <td>{{ formatCurrency(coin.high_24h) }}</td>
-              <td>{{ formatCurrency(coin.market_cap) }}</td>
+              <td class="d-none d-lg-table-cell align-right">{{ formatCurrency(coin.low_24h) }}</td>
+              <td class="d-none d-lg-table-cell align-right">{{ formatCurrency(coin.high_24h) }}</td>
+              <td class="d-none d-md-table-cell align-right">{{ formatLargeCurrency(coin.market_cap) }}</td>
             </tr>
           </tbody>
         </table>
@@ -109,6 +119,10 @@ export default {
     </div>
   </div>
 </template>
+
+<style>
+
+</style>
 
 
 <!--

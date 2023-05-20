@@ -90,11 +90,11 @@ export default {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th class="align-right">Price</th>
-              <th class="d-none d-md-table-cell align-right">24h</th>
-              <th class="d-none d-lg-table-cell align-right">Low</th>
-              <th class="d-none d-lg-table-cell align-right">High</th>
-              <th class="d-none d-md-table-cell align-right">Market Cap</th>
+              <th class="text-end">Price</th>
+              <th class="d-none d-md-table-cell text-end">24h</th>
+              <th class="d-none d-lg-table-cell text-end">Low</th>
+              <th class="d-none d-lg-table-cell text-end">High</th>
+              <th class="d-none d-md-table-cell text-end">Market Cap</th>
             </tr>
           </thead>
           <tbody>
@@ -105,13 +105,13 @@ export default {
                 <RouterLink :to="toCoin(coin.id)">{{ coin.name }}</RouterLink>&nbsp;
                 <span class="text-uppercase">{{ coin.symbol }}</span>
               </td>
-              <td class="align-right">{{ formatCurrency(coin.current_price) }}</td>
-              <td class="d-none d-md-table-cell align-right" :class="getPercentageClass(coin.price_change_percentage_24h)">
+              <td class="text-end">{{ formatCurrency(coin.current_price) }}</td>
+              <td class="d-none d-md-table-cell text-end" :class="getPercentageClass(coin.price_change_percentage_24h)">
                 {{ formatPercentage(coin.price_change_percentage_24h) }}
               </td>
-              <td class="d-none d-lg-table-cell align-right">{{ formatCurrency(coin.low_24h) }}</td>
-              <td class="d-none d-lg-table-cell align-right">{{ formatCurrency(coin.high_24h) }}</td>
-              <td class="d-none d-md-table-cell align-right">{{ formatLargeCurrency(coin.market_cap) }}</td>
+              <td class="d-none d-lg-table-cell text-end">{{ formatCurrency(coin.low_24h) }}</td>
+              <td class="d-none d-lg-table-cell text-end">{{ formatCurrency(coin.high_24h) }}</td>
+              <td class="d-none d-md-table-cell text-end">{{ formatLargeCurrency(coin.market_cap) }}</td>
             </tr>
           </tbody>
         </table>

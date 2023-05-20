@@ -29,6 +29,10 @@ export default {
       }).format(value);
       return formattedValue;
     },
+    formatNumber(value) {
+      const formattedValue = new Intl.NumberFormat('en-US').format(value);
+      return formattedValue;
+    },
     formatPercentage(value) {
       if (typeof value === 'number') {
         return value.toFixed(1) + '%';
@@ -52,7 +56,7 @@ export default {
   <div class="container">
     <main v-if="isFetched">
       <div class="row mb-3">
-        <div class="col-12 col-lg-6 mb-3">
+        <div class="col-12 mb-3">
           <div>
             <p>Rank #{{ coin.market_cap_rank }}</p>
           </div>
@@ -61,14 +65,14 @@ export default {
             <span>{{ coin.name }}</span>&nbsp;
             <span class="text-uppercase">{{ coin.symbol }}</span>
           </div>
-          <div>
+          <div class="big-price">
             {{ formatCurrency(coin.market_data.current_price.usd) }}
           </div>
           <div :class="getPercentageClass(coin.price_change_percentage_24h)">
             {{ formatPercentage(coin.market_data.price_change_percentage_24h) }}
           </div>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12">
           <div>
             <div class="d-flex justify-content-between">
               <span>Market Cap</span>
@@ -76,15 +80,15 @@ export default {
             </div>
             <div class="d-flex justify-content-between">
               <span>Circulating Supply</span>
-              <span class="text-end">{{ coin.market_data.circulating_supply }}</span>
+              <span class="text-end">{{ formatNumber(coin.market_data.circulating_supply) }}</span>
             </div>
             <div class="d-flex justify-content-between">
               <span>Total Supply</span>
-              <span class="text-end">{{ coin.market_data.total_supply }}</span>
+              <span class="text-end">{{ formatNumber(coin.market_data.total_supply) }}</span>
             </div>
             <div class="d-flex justify-content-between">
               <span>Max Supply</span>
-              <span class="text-end">{{ coin.market_data.max_supply }}</span>
+              <span class="text-end">{{ formatNumber(coin.market_data.max_supply) }}</span>
             </div>
           </div>
         </div>

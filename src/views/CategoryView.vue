@@ -55,8 +55,8 @@ export default {
                             <th>#</th>
                             <th>Name</th>
                             <th>Top Gainers</th>
-                            <th>24h</th>
-                            <th>Market Cap</th>
+                            <th class="d-none d-md-table-cell text-end">24h</th>
+                            <th class="d-none d-lg-table-cell text-end">Market Cap</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,10 +68,10 @@ export default {
                                 <img :src="category.top_3_coins[1]" alt="" width="30" height="30">
                                 <img :src="category.top_3_coins[2]" alt="" width="30" height="30">
                             </td>
-                            <td :class="getPercentageClass(category.market_cap_change_24h)">
+                            <td class="d-none d-md-table-cell text-end" :class="getPercentageClass(category.market_cap_change_24h)">
                                 {{ formatPercentage(category.market_cap_change_24h) }}
                             </td>
-                            <td>{{ formatCurrency(category.market_cap) }}</td>
+                            <td class="d-none d-lg-table-cell text-end">{{ formatCurrency(category.market_cap) }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -14,7 +14,7 @@ import Title from './components/Title.vue'
       </div>
       
       <div class="row">
-        <Title msg="Nomad's Crypto Hub" />
+        <Title msg="Nomad Crypto Hub" />
       </div>
 
       <div class="row mb-3">

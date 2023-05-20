@@ -83,17 +83,6 @@ export default {
       return value > 0 ? 'text-green' : 'text-red';
     }
   },
-  computed: {
-    filteredCoins() {
-      if (this.searchQuery) {
-        return this.coins.filter((coin) =>
-          coin.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      } else {
-        return this.coins;
-      }
-    }
-  },
   mounted() {
     this.getCoins()
   }
@@ -150,7 +139,7 @@ export default {
 </template>
 
 
-<style scoped>
+<style>
 .home {
   display: flex;
   flex-direction: column;

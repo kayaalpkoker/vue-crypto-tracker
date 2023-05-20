@@ -51,17 +51,55 @@ export default {
 
 <template>
   <div class="container">
-    <div v-if="isFetched">
-      <h1>{{ coin.name }}</h1>
-      <!-- Display other coin information here -->
-      <p>Price: {{ formatCurrency(coin.market_data.current_price.usd) }}</p>
-      <p>24h Change: <span :class="getPercentageClass(coin.price_change_percentage_24h)">{{
-        formatPercentage(coin.price_change_percentage_24h) }}</span></p>
-      <!-- Add more properties as needed -->
-    </div>
+    <main v-if="isFetched">
+      <div class="row">
+        <div class="col-12 col-lg-6 mb-3">
+          <div>
+            <p>Rank #{{ coin.market_cap_rank }}</p>
+          </div>
+          <div>
+            <span><img :src="coin.image.small" alt="Coin Icon" width="30" height="30"></span>
+            <span>{{ coin.name }}</span>
+            <span class="text-uppercase">{{ coin.symbol }}</span>
+          </div>
+          <div>
+            {{ formatCurrency(coin.market_data.current_price.usd) }}
+          </div>
+          <div :class="getPercentageClass(coin.price_change_percentage_24h)">
+            {{ formatPercentage(coin.market_data.price_change_percentage_24h) }}
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div>
+            <div class="d-flex justify-content-between">
+              <span>Market Cap</span>
+              <span class="text-end">{{ formatCurrency(coin.market_data.market_cap.usd) }}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>Circulating Supply</span>
+              <span class="text-end">{{ coin.market_data.circulating_supply }}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>Total Supply</span>
+              <span class="text-end">{{ coin.market_data.total_supply }}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>Max Supply</span>
+              <span class="text-end">{{ coin.market_data.max_supply }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p>Chart</p>
+        </div>
+      </div>
+    </main>
     <div v-else>
       <p v-if="error">Failed to fetch coin information. Please try again.</p>
       <p v-else>Loading coin information...</p>
     </div>
   </div>
+
 </template>

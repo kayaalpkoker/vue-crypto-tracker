@@ -15,21 +15,6 @@ export default {
                     }
                 });
                 this.categories = response.data;
-                /*
-                Sample API response:
-                    "id": "layer-1",
-                    "name": "Layer 1 (L1)",
-                    "market_cap": 836966646668.0885,
-                    "market_cap_change_24h": -1.609612807492597,
-                    "content": "",
-                    "top_3_coins": [
-                    "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579",
-                    "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
-                    "https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1644979850"
-                    ],
-                    "volume_24h": 13285075589.563087,
-                    "updated_at": "2023-05-19T21:10:25.723Z"
-                */
             } catch (error) {
                 console.error('Failed to fetch categories:', error);
             }
@@ -70,8 +55,8 @@ export default {
                             <th>#</th>
                             <th>Name</th>
                             <th>Top Gainers</th>
-                            <th>24h</th>
-                            <th>Market Cap</th>
+                            <th class="d-none d-md-table-cell text-end">24h</th>
+                            <th class="d-none d-lg-table-cell text-end">Market Cap</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,10 +68,10 @@ export default {
                                 <img :src="category.top_3_coins[1]" alt="" width="30" height="30">
                                 <img :src="category.top_3_coins[2]" alt="" width="30" height="30">
                             </td>
-                            <td :class="getPercentageClass(category.market_cap_change_24h)">
+                            <td class="d-none d-md-table-cell text-end" :class="getPercentageClass(category.market_cap_change_24h)">
                                 {{ formatPercentage(category.market_cap_change_24h) }}
                             </td>
-                            <td>{{ formatCurrency(category.market_cap) }}</td>
+                            <td class="d-none d-lg-table-cell text-end">{{ formatCurrency(category.market_cap) }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -95,20 +80,18 @@ export default {
     </div>
 </template>
 
-<style scoped>
-.text-green {
-    color: green;
-}
-
-.text-red {
-    color: red;
-}
-
-@media (min-width: 1024px) {
-    .about {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-    }
-}
-</style>
+<!--
+Sample API response:
+    "id": "layer-1",
+    "name": "Layer 1 (L1)",
+    "market_cap": 836966646668.0885,
+    "market_cap_change_24h": -1.609612807492597,
+    "content": "",
+    "top_3_coins": [
+    "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579",
+    "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+    "https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1644979850"
+    ],
+    "volume_24h": 13285075589.563087,
+    "updated_at": "2023-05-19T21:10:25.723Z"
+-->

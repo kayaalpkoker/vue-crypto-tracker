@@ -1,4 +1,5 @@
-import './assets/main.css'
+//import './assets/main.css'
+import './assets/root.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
 import { createApp } from 'vue'
@@ -16,4 +17,5 @@ app.use(router)
 
 app.mount('#app')
 
+// bootstrap.js to be loaded after app.mount
 import 'bootstrap/dist/js/bootstrap.js'

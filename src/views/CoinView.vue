@@ -52,7 +52,7 @@ export default {
 <template>
   <div class="container">
     <main v-if="isFetched">
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-12 col-lg-6 mb-3">
           <div>
             <p>Rank #{{ coin.market_cap_rank }}</p>
@@ -92,7 +92,7 @@ export default {
       </div>
       <div class="row">
         <div class="col-12">
-          <p>Chart</p>
+          <p><strong><em>Insert Chart.js</em></strong></p>
         </div>
       </div>
     </main>
@@ -101,5 +101,4 @@ export default {
       <p v-else>Loading coin information...</p>
     </div>
   </div>
-
 </template>

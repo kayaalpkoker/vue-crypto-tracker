@@ -4,68 +4,39 @@ import Title from './components/Title.vue'
 </script>
 
 <template>
-  <header class="container">
-    <RouterLink to="/">
-      <img alt="NCT logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-    </RouterLink>
+  <div class="container">
+    <header class="text-center">
+      
+      <div class="row">
+        <RouterLink to="/">
+          <img alt="NCH logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+        </RouterLink>
+      </div>
+      
+      <div class="row">
+        <Title msg="Nomad's Crypto Hub" />
+      </div>
 
-    <div class="row">
-      <Title msg="Nomad's Crypto Hub" />
-    </div>
-    
-    <div class="row mb-3">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/categories">Categories</RouterLink>
-      </nav>
-    </div>
+      <div class="row mb-3">
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/categories">Categories</RouterLink>
+        </nav>
+      </div>
+    </header>
 
-  </header>
+    <main class="row">
+      <RouterView />
+    </main>
 
-  <RouterView />
-
-  <footer class="row">
-    <p>&copy; 2023 Kaya Alp Köker. All rights reserved.</p>
-  </footer>
-
+    <footer class="">
+      <p>&copy; 2023 Kaya Alp Köker. All rights reserved.</p>
+    </footer>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
+/*
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -92,4 +63,5 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
+*/
 </style>

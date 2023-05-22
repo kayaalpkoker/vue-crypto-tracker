@@ -57,10 +57,10 @@ export default {
     <main v-if="isFetched">
       <div class="row mb-3">
         <div class="col-12 mb-3">
-          <div>
-            <p>Rank #{{ coin.market_cap_rank }}</p>
+          <div class="mb-3">
+            <span class="rounded bg-dark text-white px-2 py-1">Rank #{{ coin.market_cap_rank }}</span>
           </div>
-          <div>
+          <div class="mb-1">
             <span><img :src="coin.image.small" alt="Coin Icon" width="30" height="30"></span>&nbsp;
             <span>{{ coin.name }}</span>&nbsp;
             <span class="text-uppercase">{{ coin.symbol }}</span>
